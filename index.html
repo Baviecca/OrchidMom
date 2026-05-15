@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جدول العناية بالوجه</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #ffd4a3 0%, #ffb088 35%, #ff9580 70%, #ff8b9d 100%);
+    padding: 50px 16px 80px;
+    font-family: 'Tajawal', 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
+    color: #2a1810;
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 32px; }
+  .pill {
+    display: inline-block; background: #fff9f0; padding: 6px 16px;
+    border-radius: 999px; font-size: 13px; font-weight: 700;
+    color: #c2316d; letter-spacing: 0.1em; margin-bottom: 14px;
+    box-shadow: 0 4px 16px rgba(194,49,109,0.18);
+  }
+  h1 { font-size: 38px; font-weight: 900; color: #3d1f10; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .subtitle { font-size: 16px; color: #5d3520; font-weight: 500; }
+
+  .days { display: flex; flex-direction: column; gap: 20px; }
+  .day {
+    background: #fff9f0; border-radius: 22px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(80,30,15,0.15), 0 2px 6px rgba(80,30,15,0.08);
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .day.tret {
+    border: 2px solid #1f7a4f;
+    box-shadow: 0 12px 32px rgba(31,122,79,0.22), 0 2px 6px rgba(80,30,15,0.08);
+  }
+  .day-header {
+    padding: 20px 26px; border-bottom: 1px solid #f4e4d0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .day.tret .day-header { background: linear-gradient(90deg, transparent 0%, transparent 50%, #d4ecdd 100%); }
+  .day.hq .day-header { background: linear-gradient(90deg, transparent 0%, transparent 50%, #fde6f0 100%); }
+  .day-name-wrap { display: flex; align-items: baseline; gap: 12px; }
+  .day-name { font-size: 28px; font-weight: 900; color: #3d1f10; letter-spacing: -0.01em; }
+  .day-label-first { font-size: 13px; font-weight: 700; color: #c66318; }
+  .badge {
+    font-size: 12px; font-weight: 800; background: #fff;
+    padding: 6px 12px; border-radius: 999px; letter-spacing: 0.04em;
+  }
+  .day.tret .badge { color: #1f7a4f; border: 1.5px solid #1f7a4f; }
+  .day.hq .badge { color: #d63384; border: 1.5px solid #d63384; }
+
+  .section { padding: 20px 26px; }
+  .section.morning { border-bottom: 1px dashed #f0d8b8; }
+  .day.tret .section.night { background: rgba(212,236,221,0.33); }
+  .day.hq .section.night { background: rgba(253,230,240,0.33); }
+
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .section-title { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+  .section.morning .section-title { color: #c66318; }
+  .section.night .section-title { color: #5e3a99; }
+
+  .step {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; font-size: 17px; line-height: 1.7;
+  }
+  .num {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    color: #fff; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .num.morning { background: #ff8a3d; }
+  .num.tret { background: #2e9166; }
+  .num.hq { background: #d63384; }
+
+  /* Brand styles */
+  .brand { direction: ltr; display: inline-block; }
+  .b-cerave { font-family: 'Arial Black', 'Helvetica Neue', sans-serif; font-weight: 900; color: #00488f; letter-spacing: -0.04em; font-size: 1.02em; }
+  .b-ordinary { font-family: 'Times New Roman', serif; color: #0a0a0a; letter-spacing: 0.06em; font-size: 0.95em; font-weight: 400; }
+  .b-ordinary-pct { font-family: 'Times New Roman', serif; color: #888; font-size: 0.85em; margin-left: 4px; }
+  .b-skinoren { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; color: #d93547; letter-spacing: -0.01em; font-size: 1em; }
+  .b-skinoren-pct { color: #d93547; font-size: 0.85em; margin-left: 4px; font-weight: 700; }
+  .b-acretin { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; color: #1f6b4e; letter-spacing: 0.01em; font-size: 1em; }
+  .b-hiquin { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; color: #c2316d; font-size: 1em; }
+  .b-minimalist { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 300; color: #1a1a1a; letter-spacing: 0.14em; font-size: 0.92em; text-transform: lowercase; }
+
+  .footer {
+    margin-top: 32px; background: rgba(255,249,240,0.85);
+    border-radius: 16px; padding: 18px 22px; font-size: 14px;
+    color: #5d3520; line-height: 1.8; border: 1.5px dashed #d96d3a;
+  }
+  .footer strong { color: #c2316d; font-size: 15px; }
+
+  .wait-emphasis { color: #1f6b4e; font-weight: 700; }
+  .avoid-emphasis { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="pill">الأسبوع الأول</div>
+    <h1>جدول العناية بالوجه</h1>
+    <div class="subtitle">من الجمعة إلى الخميس</div>
+  </div>
+
+  <div class="days">
+
+    <!-- Friday: night only, tret -->
+    <div class="day tret">
+      <div class="day-header">
+        <div class="day-name-wrap">
+          <div class="day-name">الجمعة</div>
+          <div class="day-label-first">اليوم الأول</div>
+        </div>
+        <div class="badge">يوم <span class="brand b-acretin">Acretin</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num tret">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num tret">٢</span><span><span class="wait-emphasis">انتظري ٢٠ دقيقة</span> حتى يجف الوجه تماماً — مهم جداً</span></div>
+        <div class="step"><span class="num tret">٣</span><span>بحجم حبة البازلاء من <span class="brand b-acretin">Acretin</span> على كل الوجه، <span class="avoid-emphasis">تجنبي تحت العينين</span></span></div>
+        <div class="step"><span class="num tret">٤</span><span>بقطعة قطن (Q-tip) كمية <b>صغيرة جداً</b> من <span class="brand b-hiquin">Hiquin</span> تحت العينين فقط</span></div>
+        <div class="step"><span class="num tret">٥</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء جداً جداً فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Saturday: hq -->
+    <div class="day hq">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">السبت</div></div>
+        <div class="badge">يوم <span class="brand b-hiquin">Hiquin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num hq">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num hq">٢</span><span>طبقة رقيقة من <span class="brand b-hiquin">Hiquin</span> على كل الوجه، مع كمية إضافية صغيرة تحت العينين والبقع الداكنة</span></div>
+        <div class="step"><span class="num hq">٣</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Sunday: hq -->
+    <div class="day hq">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">الأحد</div></div>
+        <div class="badge">يوم <span class="brand b-hiquin">Hiquin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num hq">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num hq">٢</span><span>طبقة رقيقة من <span class="brand b-hiquin">Hiquin</span> على كل الوجه، مع كمية إضافية صغيرة تحت العينين والبقع الداكنة</span></div>
+        <div class="step"><span class="num hq">٣</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Monday: tret -->
+    <div class="day tret">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">الاثنين</div></div>
+        <div class="badge">يوم <span class="brand b-acretin">Acretin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num tret">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num tret">٢</span><span><span class="wait-emphasis">انتظري ٢٠ دقيقة</span> حتى يجف الوجه تماماً — مهم جداً</span></div>
+        <div class="step"><span class="num tret">٣</span><span>بحجم حبة البازلاء من <span class="brand b-acretin">Acretin</span> على كل الوجه، <span class="avoid-emphasis">تجنبي تحت العينين</span></span></div>
+        <div class="step"><span class="num tret">٤</span><span>بقطعة قطن (Q-tip) كمية <b>صغيرة جداً</b> من <span class="brand b-hiquin">Hiquin</span> تحت العينين فقط</span></div>
+        <div class="step"><span class="num tret">٥</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء جداً جداً فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Tuesday: hq -->
+    <div class="day hq">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">الثلاثاء</div></div>
+        <div class="badge">يوم <span class="brand b-hiquin">Hiquin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num hq">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num hq">٢</span><span>طبقة رقيقة من <span class="brand b-hiquin">Hiquin</span> على كل الوجه، مع كمية إضافية صغيرة تحت العينين والبقع الداكنة</span></div>
+        <div class="step"><span class="num hq">٣</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Wednesday: tret -->
+    <div class="day tret">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">الأربعاء</div></div>
+        <div class="badge">يوم <span class="brand b-acretin">Acretin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num tret">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num tret">٢</span><span><span class="wait-emphasis">انتظري ٢٠ دقيقة</span> حتى يجف الوجه تماماً — مهم جداً</span></div>
+        <div class="step"><span class="num tret">٣</span><span>بحجم حبة البازلاء من <span class="brand b-acretin">Acretin</span> على كل الوجه، <span class="avoid-emphasis">تجنبي تحت العينين</span></span></div>
+        <div class="step"><span class="num tret">٤</span><span>بقطعة قطن (Q-tip) كمية <b>صغيرة جداً</b> من <span class="brand b-hiquin">Hiquin</span> تحت العينين فقط</span></div>
+        <div class="step"><span class="num tret">٥</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء جداً جداً فوق كل شيء</span></div>
+      </div>
+    </div>
+
+    <!-- Thursday: hq -->
+    <div class="day hq">
+      <div class="day-header">
+        <div class="day-name-wrap"><div class="day-name">الخميس</div></div>
+        <div class="badge">يوم <span class="brand b-hiquin">Hiquin</span></div>
+      </div>
+      <div class="section morning">
+        <div class="section-header">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.5" fill="#ff9a3d"/>
+            <g stroke="#ff9a3d" stroke-width="2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/>
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/>
+            </g>
+          </svg>
+          <span class="section-title">الصباح</span>
+        </div>
+        <div class="step"><span class="num morning">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num morning">٢</span><span>ضعي ٣ إلى ٤ نقاط من <span class="brand"><span class="b-ordinary">The Ordinary</span><span class="b-ordinary-pct">10%</span></span> على كل الوجه وربتي بأطراف الأصابع</span></div>
+        <div class="step"><span class="num morning">٣</span><span>طبقة رقيقة من <span class="brand"><span class="b-skinoren">Skinoren</span><span class="b-skinoren-pct">20%</span></span> فوقها على كل الوجه</span></div>
+        <div class="step"><span class="num morning">٤</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء — لا تبخلي</span></div>
+      </div>
+      <div class="section night">
+        <div class="section-header">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#6b4ba8"/></svg>
+          <span class="section-title">المساء</span>
+        </div>
+        <div class="step"><span class="num hq">١</span><span>الغسول <span class="brand b-minimalist">Minimalist</span></span></div>
+        <div class="step"><span class="num hq">٢</span><span>طبقة رقيقة من <span class="brand b-hiquin">Hiquin</span> على كل الوجه، مع كمية إضافية صغيرة تحت العينين والبقع الداكنة</span></div>
+        <div class="step"><span class="num hq">٣</span><span>مرطب <span class="brand b-cerave">CeraVe</span> بسخاء فوق كل شيء</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <strong>تذكير:</strong><br>
+    • في ليالي <span class="brand b-acretin">Acretin</span>، <span class="brand b-hiquin">Hiquin</span> فقط تحت العينين بقطعة قطن — لا تضعيها على كل الوجه<br>
+    • <span class="brand b-cerave">CeraVe</span> بسخاء دائماً — لو الوجه احمر، زيدي المرطب<br>
+    • لو شعرتِ بحرقة قوية، اغسلي وضعي مرطب فقط واتركي العلاجات الليلة
+  </div>
+</div>
+
+</body>
+</html>
