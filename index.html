@@ -10,7 +10,7 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    min-height: 100vh;
+    min-height: 100vh; overflow-x: hidden;
     background: linear-gradient(160deg, #ffd4a3 0%, #ffb088 35%, #ff9580 70%, #ff8b9d 100%);
     padding: 50px 16px 80px;
     font-family: 'Tajawal', 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
@@ -235,7 +235,7 @@
   .nav-btn:active { transform: scale(0.92); }
   .nav-btn svg { fill: #d96d3a; }
   .nav-position { flex: 1; text-align: center; font-weight: 800; color: #3d1f10; font-size: 14px; letter-spacing: 0.04em; }
-  .nav-position .counter { display: block; font-size: 11px; font-weight: 600; color: #8b6a47; margin-top: 2px; letter-spacing: 0.08em; }
+  .nav-position .counter { display: block; direction: ltr; font-size: 11px; font-weight: 600; color: #8b6a47; margin-top: 2px; letter-spacing: 0.08em; }
 
   .dots { max-width: 720px; margin: 0 auto 16px; display: flex; justify-content: center; gap: 8px; direction: ltr; }
   .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); border: 1.5px solid rgba(61,31,16,0.3); cursor: pointer; transition: all 0.2s; }
